@@ -1,0 +1,211 @@
+:root{
+  --bg-top:#071223;
+  --bg-bottom:#081a30;
+  --panel: rgba(255,255,255,0.04);
+  --glass: rgba(255,255,255,0.03);
+  --accent: #ff6b6b;
+  --muted: rgba(255,255,255,0.65);
+  --success: #7efc6a;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+html,body,#game{height:100%}
+body{
+  background: linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
+  color:#eaf6ff;
+  overflow:hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#topbar{
+  position:fixed;
+  left:0; right:0; top:0;
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 16px;
+  z-index:30;
+  backdrop-filter: blur(6px);
+}
+
+#brand{
+  font-weight:800;
+  font-size:18px;
+  background: linear-gradient(90deg,#ffd87b,#ff6b6b,#9b8cff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+#top-controls{display:flex;gap:8px}
+.btn{
+  background:var(--panel);
+  border:1px solid rgba(255,255,255,0.04);
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+.btn.small{padding:6px 8px;font-size:13px;border-radius:8px}
+.btn:active{transform:translateY(1px)}
+
+#main{position:relative;height:100vh;padding-top:64px;display:flex}
+#game{flex:1; display:block; width:100%; height:calc(100vh - 64px)}
+
+#side{
+  width:220px;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  z-index:20;
+  pointer-events:auto;
+}
+.panel{
+  background:var(--panel);
+  padding:12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.03);
+}
+.panel-title{font-size:13px;color:var(--muted);margin-bottom:8px}
+
+#hud-distance,#hud-high{font-weight:700;font-size:16px;color:#eaf6ff;padding:6px 0}
+
+#skin-preview{
+  width:80px;height:80px;border-radius:12px;background:linear-gradient(180deg,#fff1 0%,#0000 60%);
+  display:flex;align-items:center;justify-content:center;margin-bottom:8px;
+}
+
+#overlay{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:50;
+  background:rgba(2,6,12,0.45);
+}
+#menuCard{
+  position: relative;
+  background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+  padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);min-width:320px;
+}
+#menuTitle{margin-bottom:10px}
+#menuBody{max-height:60vh;overflow:auto;margin-bottom:12px}
+#menuActions{text-align:right}
+
+/* Customize corner button inside Play menu */
+.menu-customize {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.05);
+  color: var(--muted);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.menu-customize .dot{
+  width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px rgba(255,107,107,0.25);
+}
+
+/* Skins grid */
+.skin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+}
+.skin-card {
+  background: rgba(255,255,255,0.02);
+  border-radius:10px;
+  padding:10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(255,255,255,0.03);
+  cursor:pointer;
+}
+.skin-preview-small {
+  width:56px;height:56px;border-radius:8px;border:2px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* hidden helper */
+.hidden{display:none}
+
+/* FIX: ensure the gameOver layer receives pointer events and sits above other UI */
+#gameOver{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  pointer-events:auto;
+  background:transparent;
+}
+#goCard{
+  background:rgba(5,8,13,0.95);
+  padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);text-align:center;
+  pointer-events:auto;
+}
+#goTitle{font-size:22px;color:var(--accent);font-weight:800;margin-bottom:8px}
+.goButtons{display:flex;gap:8px;justify-content:center;margin-top:12px}
+
+/* Floating editor button in corner */
+.floating-editor{
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 80;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--muted);
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* Editor panel layout: timeline and preview side-by-side */
+#editorPanel{position:fixed;inset:0;display:flex;align-items:flex-end;justify-content:center;z-index:70;padding:20px}
+#editorCard{
+  width:100%;
+  max-width:1100px;
+  background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+  padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);
+}
+#editorContent{display:flex;flex-direction:column;gap:12px}
+#editorMain{display:flex;gap:12px;align-items:flex-start}
+#editorTimeline{
+  flex:1;
+  background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+  height:140px;border-radius:8px;border:1px dashed rgba(255,255,255,0.03);padding:8px;display:flex;align-items:center;justify-content:center;color:var(--muted)
+}
+#editorPreviewWrapper{
+  width:320px;
+  min-height:140px;
+  background:var(--panel);
+  padding:8px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.03);
+}
+#previewCanvas{width:100%;height:120px;display:block;border-radius:6px;background:linear-gradient(180deg,#081426,#071323);}
+
+/* Editor tools and actions */
+#editorTools{display:flex;gap:10px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+#editorActions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+
+#footer{position:fixed;left:0;right:0;bottom:8px;text-align:center;font-size:13px;color:var(--muted);z-index:20}
+
+/* responsive */
+@media (max-width:900px){
+  #side{display:none}
+  #editorCard{max-width:100%}
+  #editorMain{flex-direction:column}
+  #editorPreviewWrapper{width:100%}
+  .floating-editor{right:8px;bottom:70px}
+}
